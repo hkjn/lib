@@ -46,7 +46,7 @@ export LOGGING_LEVEL=${LOGGING_LEVEL:-2}
 
 # fatal prints given error messages to stderr, then exits the top-level script.
 fatal() {
-	echo -e "${HIRED}[$LOG_PREFIX]${NC} ${LRED}FATAL: $@${NC}" >&2
+	echo -e "${URED}[$LOG_PREFIX]${NC} ${LRED}FATAL: $@${NC}" >&2
 	kill -s TERM $LOGGER_PID
 }
 
