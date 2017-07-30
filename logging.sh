@@ -82,9 +82,7 @@ debug() {
 
 # debugV prints given verbose debug messages to stdout.
 debugV() {
-	[ "$LOGGING_LEVEL" -ge 3 ] && {
-		echo -e "${CYAN}[${LOG_PREFIX}V]${NC} ${LGREEN}$@${NC}" >&2
-	}
+	[[ "$LOGGING_LEVEL" -ge 3 ]] && echo -e "${CYAN}[${LOG_PREFIX}V]${NC} ${LGREEN}$@${NC}" >&2
 	return 0
 }
 
@@ -92,18 +90,14 @@ debugV() {
 # confirm shows a confirmation prompt, and returns success only if the user confirms the action.
 confirm() {
 	local skipConfirmations=${SKIP_CONFIRMATIONS:-""}
-	if [ "$skipConfirmations" ]; then
-		return 0
-	fi
+	[[ "$skipConfirmations" ]] && return 0
 	local msg="Is this your intent?"
-	if [ "$#" -eq 1 ]; then
-		msg="$1"
-	fi
+	[[ "$#" -eq 1 ]] && msg="$1"
 	infon "$msg [y/N] "
 	read -r -p "" response
-	if [[ ! $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+	[[ $response =~ ^([yY][eE][sS]|[yY])$ ]] || {
 		info "Ok."
 		return 1
-	fi
+  }
 	return 0
 }
