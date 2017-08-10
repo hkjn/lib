@@ -11,6 +11,9 @@
 # }
 # f=$(getFoo)
 #
+# TODO: Add more colors, taken from:
+# for c in {0..255}; do echo -e "\e[38;05;${c}m ${c} Bash Color Chart"; done
+#
 
 LOG_PREFIX="$(basename $0)"
 
